@@ -9,10 +9,6 @@ const Container = styled.div`
   padding: 10px 15px;
   text-align: center;
   color: #bbb;
-
-  img {
-    width: 100%;
-  }
 `
 
 const Day = styled.h3`
@@ -32,25 +28,25 @@ const Temperature = styled.span`
 `
 
 const weatherIcons = [
-  { name: 'sunny', src: '//ssl.gstatic.com/onebox/weather/64/sunny.png' },
-  { name: 'rain', src: 'http://ssl.gstatic.com/onebox/weather/64/rain.png' },
+  { name: 'Clear', src: '//ssl.gstatic.com/onebox/weather/64/sunny.png' },
+  { name: 'Rain', src: 'http://ssl.gstatic.com/onebox/weather/64/rain.png' },
   {
-    name: 'cloudy',
+    name: 'Clouds',
     src: 'http://ssl.gstatic.com/onebox/weather/64/cloudy.png'
   },
-  { name: 'snowy', src: 'http://ssl.gstatic.com/onebox/weather/64/snow.png' }
+  { name: 'Snow', src: 'http://ssl.gstatic.com/onebox/weather/64/snow.png' }
 ]
 
 const WeatherDay = ({ day, weather, high, low }) => (
   <Container>
     <Day>{moment.unix(day).format('ddd')}</Day>
     <img
-      src={weatherIcons.find(icon => icon.name === weather).src}
+      src={weatherIcons.find(icon => icon.name === weather.main).src}
       alt={weather}
     />
     <div>
-      <Temperature className="high">{high}</Temperature>
-      <Temperature>{low}</Temperature>
+      <Temperature className="high">{Math.round(high)}</Temperature>
+      <Temperature>{Math.round(low)}</Temperature>
     </div>
   </Container>
 )
