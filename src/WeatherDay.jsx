@@ -4,11 +4,16 @@ import moment from 'moment'
 
 const Container = styled.div`
   display: inline-block;
-  border: 1px solid none;
+  border: 1px solid transparent;
   border-radius: 2px;
   padding: 10px 15px;
   text-align: center;
   color: #bbb;
+
+  &.selected {
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+  }
 `
 
 const Day = styled.h3`
@@ -37,8 +42,8 @@ const weatherIcons = [
   { name: 'Snow', src: 'http://ssl.gstatic.com/onebox/weather/64/snow.png' }
 ]
 
-const WeatherDay = ({ day, weather, high, low }) => (
-  <Container>
+const WeatherDay = ({ day, weather, high, low, onClick, selected }) => (
+  <Container onClick={onClick} className={selected ? 'selected' : ''}>
     <Day>{moment.unix(day).format('ddd')}</Day>
     <img
       src={weatherIcons.find(icon => icon.name === weather.main).src}
